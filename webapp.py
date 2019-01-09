@@ -6,9 +6,11 @@ app = Flask(__name__) #__name__ = "__main__" if this is the file that was run.  
 def render_main():
     return render_template('home.html')
 
-@app.route("/response")
+@app.route("/response", methods=['POST','GET'])
 def render_response():
-    color = request.args['color']
+    if request.method=='POST':
+        color = request.form['color']
+   
     #the request object stores info about the request sent to the server
     #args is a MultiDict (like a dictonary but it can have multiple values for the same key
     #The info in args is visible in the url for the page being requesed ex.../response?color=orange
